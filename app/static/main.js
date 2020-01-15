@@ -8,7 +8,10 @@ $(function() {
         'id': $(this).data('device-id').toString()
       }),
       type: 'POST',
-      async: false
+      async: false,
+      complete: function() {
+        $(this).blue();
+      }
     })
   })
 })
