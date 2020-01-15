@@ -10,7 +10,7 @@ $(function() {
       type: 'POST',
       complete: function() {
         alert('complete')
-        $(this).blue();
+        $(this).blur();
       }
     })
   })
