@@ -1,7 +1,7 @@
 from flask import render_template, request, session, flash, redirect
 from json import load
 from time import sleep
-from app import app, switcher
+from app import app, switcher, verify_password
 
 @app.route('/')
 def index():
@@ -28,7 +28,8 @@ def switch():
 def login():
   if request.method == 'GET':
     return render_template('login.html')
-  elif 'password' in request.form and request.form['password'] == app.config['PASSWORD']:
+  elif 'password' in request.form and \
+        verify_password(app.config['PASSWORD_HASH'], request.form['password']):
     session['logged_in'] = True
     return redirect('/')
   else:
