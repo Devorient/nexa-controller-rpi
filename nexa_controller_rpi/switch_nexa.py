@@ -1,7 +1,26 @@
 import logging
 import time
 
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
+class GPIO(object):
+    BOARD = 'adfa'
+    OUT = 'adfad'
+    @classmethod
+    def output(cls, pin, bool):
+        pass
+
+    @classmethod
+    def setmode(cls, mode):
+        pass
+    
+    @classmethod
+    def setup(cls, pin, dir):
+        pass
+
+    @classmethod
+    def cleanup(cls):
+        pass
+
 
 
 class NexaSwitcher:
