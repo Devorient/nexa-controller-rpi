@@ -27,15 +27,14 @@ class MetaNexaSwitcher(type):
   def __call__(cls, *args, **kwargs):
     if cls._instance is None:
       cls._instance = super(MetaNexaSwitcher, cls).__call__(*args, **kwargs)
+    else:
+      cls._instance.__init__(*args, **kwargs)
     return cls._instance
 
 class NexaSwitcher(metaclass=MetaNexaSwitcher):
   def __init__(self, data_pin):
     self._data_pin = data_pin
     logging.info("Created NexaSwitcher for data PIN #{}".format(data_pin))
-  
-  def __getattr__(self, name):
-    return getattr(self.instance, name)
 
   def sleep_T(self, T_num):
     time.sleep(T_num * 250 / 1000000.0)
