@@ -102,9 +102,9 @@ class NexaSwitcher(metaclass=MetaNexaSwitcher):
 
     # Send the signal one more time,
     # sometimes it happens not to be decoded correctly
-    time.sleep(1)
-    for _ in range(0, 5):
-      self.send_on_off(on_off, tx_code)
+    # time.sleep(1)
+    # for _ in range(0, 5):
+    #   self.send_on_off(on_off, tx_code)
 
     GPIO.output(self._data_pin, False)  # Make sure that we do not leave PIN in 'on' state
     GPIO.cleanup()
