@@ -18,23 +18,7 @@
   background-color: white;
 }
 
-.btn:focus {
-  box-shadow: 0 0 0 0 rgba(0,0,0,0);
-}
-
 .btn-outline-success:hover {
-  background-color: transparent;
-  color: #28a745;
-  border-color: #28a745;
-}
-
-/* .btn-outline-success:focus {
-  background-color: transparent;
-  color: #28a745;
-  border-color: #28a745;
-}
-
-.btn-outline-success:active {
   background-color: transparent;
   color: #28a745;
   border-color: #28a745;
@@ -45,15 +29,3 @@
   color: #dc3545;
   border-color: #dc3545;
 }
-
-.btn-outline-danger:focus {
-  background-color: transparent;
-  color: #dc3545;
-  border-color: #dc3545;
-}
-
-.btn-outline-danger:active {
-  background-color: transparent;
-  color: #dc3545;
-  border-color: #dc3545;
-} */

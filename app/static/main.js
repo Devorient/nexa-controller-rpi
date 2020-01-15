@@ -7,7 +7,10 @@ $(function() {
         'switch': $(this).data('switch') == 'on' ? true : false,
         'id': $(this).data('device-id').toString()
       }),
-      type: 'POST'
+      type: 'POST',
+      complete: function() {
+        $(this).blue();
+      }
     })
   })
 })
