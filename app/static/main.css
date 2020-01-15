@@ -21,3 +21,9 @@
 .btn:focus {
   box-shadow: 0 0 0 0 rgba(0,0,0,0);
 }
+
+.btn:hover {
+  background-color: transparent;
+  color: #28a745;
+  border-color: #28a745;
+}
