@@ -1,5 +1,6 @@
 import logging
 import time
+from typing import Optional
 
 # import RPi.GPIO as GPIO
 class GPIO(object):
@@ -21,20 +22,16 @@ class GPIO(object):
   def cleanup(cls):
     pass
 
+class MetaNexaSwitcher(type):
+  _instance : Optional[type] = None
+  def __call__(cls, *args, **kwargs):
+    if cls._instance is None:
+      cls._instance = super(MetaNexaSwitcher, cls).__call__(*args, **kwargs)
+    return cls._instance
 
-
-class NexaSwitcher:
-  class __NexaSwitcher:
-    def __init__(self, data_pin):
-      self._data_pin = data_pin
-  
-  instance = None
-
+class NexaSwitcher(metaclass=MetaNexaSwitcher):
   def __init__(self, data_pin):
-    if not NexaSwitcher.instance:
-      NexaSwitcher.instance = NexaSwitcher.__NexaSwitcher(data_pin)
-    else:
-      NexaSwitcher.instance._data_pin = data_pin
+    self._data_pin = data_pin
     logging.info("Created NexaSwitcher for data PIN #{}".format(data_pin))
   
   def __getattr__(self, name):
@@ -111,3 +108,4 @@ class NexaSwitcher:
 
     GPIO.output(self._data_pin, False)  # Make sure that we do not leave PIN in 'on' state
     GPIO.cleanup()
+    self._lock.release()
