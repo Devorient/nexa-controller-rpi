@@ -27,3 +27,9 @@
   color: #28a745;
   border-color: #28a745;
 }
+
+.btn:active {
+  background-color: transparent;
+  color: #28a745;
+  border-color: #28a745;
+}
