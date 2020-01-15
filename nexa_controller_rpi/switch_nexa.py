@@ -1,5 +1,6 @@
 import time
 from typing import Optional
+from multiprocessing import Lock
 
 # import RPi.GPIO as GPIO
 class GPIO(object):
@@ -31,6 +32,7 @@ class MetaNexaSwitcher(type):
     return cls._instance
 
 class NexaSwitcher(metaclass=MetaNexaSwitcher):
+  _lock = Lock()
   def __init__(self, data_pin):
     self._data_pin = data_pin
 
@@ -92,6 +94,7 @@ class NexaSwitcher(metaclass=MetaNexaSwitcher):
     self.send_pause()
 
   def switch(self, tx_code, on_off):
+    self._lock.acquire()
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(self._data_pin, GPIO.OUT)
     for _ in range(0, 5):
@@ -105,3 +108,4 @@ class NexaSwitcher(metaclass=MetaNexaSwitcher):
 
     GPIO.output(self._data_pin, False)  # Make sure that we do not leave PIN in 'on' state
     GPIO.cleanup()
+    self._lock.release()
