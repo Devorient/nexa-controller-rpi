@@ -6,4 +6,4 @@ application.config.from_object('config_local')
 
 from nexa_controller_rpi import switcher
 
-from app import views
+from application import views
