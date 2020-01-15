@@ -9,8 +9,8 @@
           <div class="input-group mb-2">
             <input type="text" class="form-control" value="{{ devices[device_id].name }}" disabled>
             <div class="input-group-append w-50">
-              <a class="btn btn-outline-success w-50" type="button" href="/switch?switch=on&id={{ device_id }}">On</a>
-              <a class="btn btn-outline-danger w-50" type="button" href="/switch?switch=off&id={{ device_id }}">Off</a>
+              <button class="btn btn-outline-success w-50 switch" type="button" data-switch="on" data-device-id="{{ device_id }}">On</button>
+              <button class="btn btn-outline-danger w-50 switch" type="button" data-switch="off" data-device-id="{{ device_id }}">Off</button>
             </div>
           </div>
         {% endfor %}

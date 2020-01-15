@@ -14,15 +14,16 @@ def index():
       rooms = db['rooms']
     return render_template('index.html', rooms=rooms, devices=devices)
 
-@app.route('/switch')
+@app.route('/switch', methods=['POST'])
 def switch():
-  with open('controller_db.json', 'r') as db_file:
-    db = load(db_file)
-    devices = db['devices']
-  if 'id' in request.args and 'switch' in request.args:
-    switcher.switch(devices[request.args.get('id')]['code'],
-                    request.args.get('switch') == 'on')
-  return redirect('/')
+  if request.mimetype == 'application/json':
+    data = request.get_json()
+  if data and 'id' in data and 'switch' in data:
+    with open('controller_db.json', 'r') as db_file:
+      db = load(db_file)
+      devices = db['devices']
+    switcher.switch(devices[data['id']]['code'], data['switch'])
+  return '', 200
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
