@@ -1,4 +1,3 @@
-import logging
 import time
 from typing import Optional
 from multiprocessing import Process, Queue
@@ -38,7 +37,6 @@ class NexaSwitcher(metaclass=MetaNexaSwitcher):
     self._tx_queue = Queue(10)
     self._tx_process = Process(target=self.tx_task)
     self._tx_process.start()
-    logging.info("Created NexaSwitcher for data PIN #{}".format(data_pin))
 
   def tx_task(self):
     code, on_off = self._tx_queue.get()
