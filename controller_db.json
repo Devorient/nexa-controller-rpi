@@ -1,0 +1,24 @@
+{
+  "devices":{
+    "1": {
+      "name": "Table lamp",
+      "code": 64704186
+    },
+    "2": {
+      "name": "Test lamp",
+      "code": 8191049
+    },
+    "3": {
+      "name": "Strip lamp",
+      "code": 49147702
+    },
+    "4": {
+      "name": "Table lamp",
+      "code": 20297017
+    }
+  },
+  "rooms": {
+    "1": {"name": "Kitchen", "device_ids":["1", "2"]},
+    "2": {"name": "Living Room", "device_ids":["3", "4"]}
+  }
+}

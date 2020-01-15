@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Nexa Controller{% endblock %}
+{% block body %}
+<div class="list-group with-header">
+  {% for room in rooms.values() %}
+    <div class="list-group-item">
+      <h2 class="mb-3">{{ room.name }}</h3>
+        {% for device_id in room.device_ids %}
+          <div class="input-group mb-2">
+            <input type="text" class="form-control" value="{{ devices[device_id].name }}" disabled>
+            <div class="input-group-append w-50">
+              <a class="btn btn-outline-success w-50" type="button" href="/switch?switch=on&id={{ device_id }}">On</a>
+              <a class="btn btn-outline-danger w-50" type="button" href="/switch?switch=off&id={{ device_id }}">Off</a>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
+

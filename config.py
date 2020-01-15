@@ -1,0 +1,3 @@
+DEBUG = True
+SECRET_KEY = '%M79$oLtq6e1a3xF80egIaTU#aT^F#ZI'
+PASSWORD = '$j1C7RBlM$**eWWz'

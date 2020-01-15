@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Nexa Controller Login{% endblock %}
+{% block body %}
+
+<div class="mt-3">
+  <h2>Login</h2>
+  {% if session['logged_in'] %}
+  <p>You are already logged in!</p>
+  {% else %}
+  <form action="/login" method="POST">
+    <div class="input-group">
+      <input type="password" name="password" class="form-control {% if error %}is-invalid{% endif %}" placeholder="Password">
+      <div class="input-group-append w-25">
+        <button class="btn btn-outline-primary w-100" type="submit">Login</button>
+      </div>
+    </div>
+  </form>
+  {% endif %}
+</div>
+
+{% endblock %}
