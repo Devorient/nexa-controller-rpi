@@ -24,11 +24,11 @@ class GPIO(object):
 
 class MetaNexaSwitcher(type):
   _instance : Optional[type] = None
-  def __call__(cls, *args, **kwargs):
+  def __call__(cls, data_pin):
     if cls._instance is None:
-      cls._instance = super(MetaNexaSwitcher, cls).__call__(*args, **kwargs)
+      cls._instance = super(MetaNexaSwitcher, cls).__call__(data_pin)
     else:
-      cls._instance.__init__(*args, **kwargs)
+      cls._instance._data_pin = data_pin
     return cls._instance
 
 class NexaSwitcher(metaclass=MetaNexaSwitcher):
