@@ -1,6 +1,7 @@
 import logging
 import time
 from typing import Optional
+from multiprocessing import Process, Queue
 
 # import RPi.GPIO as GPIO
 class GPIO(object):
@@ -34,7 +35,14 @@ class MetaNexaSwitcher(type):
 class NexaSwitcher(metaclass=MetaNexaSwitcher):
   def __init__(self, data_pin):
     self._data_pin = data_pin
+    self._tx_queue = Queue(10)
+    self._tx_process = Process(target=self.tx_task)
+    self._tx_process.start()
     logging.info("Created NexaSwitcher for data PIN #{}".format(data_pin))
+
+  def tx_task(self):
+    code, on_off = self._tx_queue.get()
+    self.switch(code, on_off)
 
   def sleep_T(self, T_num):
     time.sleep(T_num * 250 / 1000000.0)
@@ -107,4 +115,6 @@ class NexaSwitcher(metaclass=MetaNexaSwitcher):
 
     GPIO.output(self._data_pin, False)  # Make sure that we do not leave PIN in 'on' state
     GPIO.cleanup()
-    self._lock.release()
+  
+  def queue_switch(self, tx_code, on_off):
+    self._tx_queue.put((tx_code, on_off))
